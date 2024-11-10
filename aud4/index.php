@@ -15,7 +15,7 @@ if (!isset($_SESSION['jwt']) || !decodeJWT($_SESSION['jwt'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Заштитена Страна</title>
+    <title>Контролна табла</title>
     <!-- Link to Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -24,7 +24,7 @@ if (!isset($_SESSION['jwt']) || !decodeJWT($_SESSION['jwt'])) {
 
 <div class="flex items-center justify-center min-h-screen">
     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h1 class="text-3xl font-semibold text-center text-green-600 mb-4">Добредојдовте на заштитената страница!</h1>
+        <h1 class="text-3xl font-semibold text-center text-green-600 mb-4">Добредојдовте на контролната табла!</h1>
 
         <p class="text-center text-lg mb-6">Вашата најава беше успешна. Добредојдовте!</p>
 
