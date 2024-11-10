@@ -1,6 +1,4 @@
 <?php
-// index.php - Заштитена страница за најавен корисник
-
 session_start();
 require 'jwt_helper.php';
 
