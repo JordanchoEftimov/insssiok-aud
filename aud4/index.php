@@ -1,37 +1,41 @@
 <?php
 session_start();
+require 'jwt_helper.php';
 
-// Провера за автентикација, ако нема корисник, го пренасочуваме на страницата за најава
-if (!isset($_SESSION['user_id'])) {
+// Проверка дали JWT токенот постои и е валиден
+if (!isset($_SESSION['jwt']) || !decodeJWT($_SESSION['jwt'])) {
     header("Location: login.php");
-    exit();
+    exit;
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="mk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добредојдовте на Вашиот профил</title>
+    <title>Заштитена Страна</title>
+    <!-- Link to Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100">
-<div class="min-h-screen flex items-center justify-center">
-    <div class="bg-white shadow-lg rounded-lg p-8 w-96">
-        <h1 class="text-3xl font-bold text-gray-800 mb-4 text-center">Добредојдовте на Вашиот профил</h1>
 
-        <p class="text-lg text-gray-600 mb-6 text-center">
-            Здраво, <span class="font-semibold text-blue-600"><?php echo htmlspecialchars($_SESSION['username']); ?></span>!
-        </p>
+<body class="bg-gray-100 text-gray-900 font-sans">
+
+<div class="flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-3xl font-semibold text-center text-green-600 mb-4">Добредојдовте на заштитената страница!</h1>
+
+        <p class="text-center text-lg mb-6">Вашата најава беше успешна. Добредојдовте!</p>
 
         <div class="text-center">
-            <a href="logout_handler.php"
-               class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-150">
+            <a href="logout_handler.php" class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-lg">
                 Одјави се
             </a>
         </div>
     </div>
 </div>
+
 </body>
+
 </html>

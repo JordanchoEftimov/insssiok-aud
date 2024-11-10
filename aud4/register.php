@@ -1,35 +1,40 @@
+<?php
+// index.php - Заштитена страница за најавен корисник
+
+session_start();
+require 'jwt_helper.php';
+
+// Проверка дали JWT токенот постои и е валиден
+if (isset($_SESSION['jwt']) && decodeJWT($_SESSION['jwt'])) {
+    header("Location: index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
-<html lang="mk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрација</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.1/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-<div class="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
-    <h2 class="text-2xl font-bold mb-4 text-center text-gray-800">Регистрирај се</h2>
-
-    <form action="register_handler.php" method="POST" class="space-y-4">
-        <div>
-            <label for="username" class="block text-gray-600 font-semibold mb-1">Корисничко име:</label>
-            <input type="text" name="username" id="username" required
-                   class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+<div class="w-full max-w-md bg-white p-8 rounded shadow">
+    <h2 class="text-2xl font-semibold text-center mb-6">Регистрирајте се</h2>
+    <form action="register_handler.php" method="POST">
+        <div class="mb-4">
+            <label for="username" class="block text-sm font-semibold">Корисничко име</label>
+            <input type="text" name="username" id="username" class="w-full p-2 mt-1 border rounded" required>
         </div>
-        <div>
-            <label for="password" class="block text-gray-600 font-semibold mb-1">Лозинка:</label>
-            <input type="password" name="password" id="password" required
-                   class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        <div class="mb-4">
+            <label for="password" class="block text-sm font-semibold">Лозинка</label>
+            <input type="password" name="password" id="password" class="w-full p-2 mt-1 border rounded" required>
         </div>
-        <button type="submit"
-                class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition duration-150">
-            Регистрирај се
-        </button>
+        <button type="submit" class="w-full py-2 bg-blue-500 text-white rounded">Регистрирај се</button>
+        <p class="mt-4 text-sm text-center">
+            Веќе имате акаунт? <a href="login.php" class="text-blue-500">Најавете се тука</a>
+        </p>
     </form>
-
-    <p class="text-center text-gray-600 mt-4">
-        Веќе имате акаунт? <a href="login.php" class="text-blue-500 hover:underline">Најави се тука</a>
-    </p>
 </div>
 </body>
 </html>

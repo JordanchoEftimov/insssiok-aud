@@ -1,22 +1,24 @@
 <?php
-// db.php - Подесување на база на податоци со PDO за користење на SQLite
-
+// Поврзување со базата
 try {
-    // Создавање на конекција кон SQLite базата на податоци. Префиксот `sqlite:` кажува на PDO да користи SQLite драјвер
-    $pdo = new PDO('sqlite:' . __DIR__ . '/database.sqlite');
-
-    // Поставување на PDO режимот за грешки за подобро дебагирање
+    // sqlite: е драјверот што се користи
+    // __DIR__ е магичен константен параметар што ја враќа патеката до директориумот каде што се наоѓа моментално PHP сктриптата.
+    $dsn = 'sqlite:' . __DIR__ . '/database.sqlite';
+    // Креирање на нов објект за поврзување со базата
+    $pdo = new PDO($dsn);
+    // Поставување на режимот за грешки на PDO
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Креирање на табелата `users` доколку не постои. Табелата чува податоци за корисници
-    $pdo->exec("CREATE TABLE IF NOT EXISTS users (
+    // Креирање на табела за корисници ако не постои
+    $query = "CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL
-    )");
-
+        username TEXT NOT NULL,
+        password TEXT NOT NULL,
+        role TEXT NOT NULL
+    )";
+    $pdo->exec($query);  // Извршување на SQL за креирање на табела
 } catch (PDOException $e) {
-    // При проблем со конекцијата, се прекинува скриптата и се покажува грешката
-    die("Поврзување на базата неуспешно: " . $e->getMessage());
+    // Ако се појави грешка при поврзување, испечатете ја и прекинете го извршувањето на скриптата
+    die("Поврзувањето со базата на податоци не успеа: " . $e->getMessage());
 }
 ?>
