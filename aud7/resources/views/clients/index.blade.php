@@ -3,11 +3,10 @@
 @section('content')
     <h1>Clients</h1>
 
-    @if(session('success'))
-        <div>
-            {{ session('success') }}
-        </div>
-    @endif
+    <form method="GET" action="{{ route('clients.index') }}">
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
 
     <a href="{{ route('clients.create') }}">
         <button>Create Client</button>

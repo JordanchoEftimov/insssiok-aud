@@ -3,12 +3,6 @@
 @section('content')
     <h1>Invoices</h1>
 
-    @if(session('success'))
-        <div>
-            {{ session('success') }}
-        </div>
-    @endif
-
     <form method="GET" action="{{ route('invoices.index') }}">
         <label for="status">Filter by Status:</label>
         <select name="status" id="status">

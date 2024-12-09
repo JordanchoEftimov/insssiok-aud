@@ -9,12 +9,15 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function index(): View|Factory|Application
+    public function index(Request $request): View|Factory|Application
     {
         $clients = Client::query()
+            ->when($request->has('search'),
+                fn ($query) => $query->where('full_name', 'like', '%'.$request->get('search').'%'))
             ->latest()
             ->paginate(10);
 
