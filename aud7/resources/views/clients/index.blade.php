@@ -30,6 +30,8 @@
                 <td>{{ $client->phone }}</td>
                 <td>{{ $client->address }}</td>
                 <td>
+                    <a href="{{ route('clients.show', $client->id) }}">View</a>
+
                     <a href="{{ route('clients.edit', $client->id) }}">Edit</a>
 
                     <form action="{{ route('clients.destroy', $client->id) }}" method="POST" style="display:inline;">

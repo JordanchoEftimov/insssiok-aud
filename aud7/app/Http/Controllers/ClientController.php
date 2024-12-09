@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Client\ClientStoreRequest;
 use App\Http\Requests\Client\ClientUpdateRequest;
+use App\Http\Resources\Client\ClientIndexResource;
 use App\Models\Client;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -21,7 +22,9 @@ class ClientController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('clients/index', compact('clients'));
+        return view('clients/index', [
+            'clients' => ClientIndexResource::collection($clients),
+        ]);
     }
 
     public function create(): View|Factory|Application
@@ -51,6 +54,13 @@ class ClientController extends Controller
         return redirect()
             ->route('clients.index')
             ->with('success', 'Client updated successfully.');
+    }
+
+    public function show(Client $client): View|Factory|Application
+    {
+        $client->load('invoices');
+
+        return view('clients/show', compact('client'));
     }
 
     public function destroy(Client $client): RedirectResponse

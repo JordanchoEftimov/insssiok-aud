@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Invoice\InvoiceStoreRequest;
 use App\Http\Requests\Invoice\InvoiceUpdateRequest;
+use App\Http\Resources\Invoice\InvoiceIndexResource;
 use App\Models\Client;
 use App\Models\Invoice;
 use Illuminate\Contracts\View\Factory;
@@ -25,7 +26,9 @@ class InvoiceController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('invoices/index', compact('invoices'));
+        return view('invoices/index', [
+            'invoices' => InvoiceIndexResource::collection($invoices),
+        ]);
     }
 
     public function create(): View|Factory|Application

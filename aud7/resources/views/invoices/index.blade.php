@@ -35,7 +35,11 @@
         @foreach ($invoices as $invoice)
             <tr>
                 <td>{{ $invoice->invoice_number }}</td>
-                <td>{{ $invoice->client->full_name }}</td>
+                <td>
+                    <a href="{{ route('clients.show', $invoice->client->id) }}">
+                        {{ $invoice->client->full_name }}
+                    </a>
+                </td>
                 <td>{{ $invoice->created_at }}</td>
                 <td>{{ $invoice->due_date }}</td>
                 <td>{{ ucfirst($invoice->status) }}</td>

@@ -8,5 +8,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('clients', ClientController::class)->except('show');
+Route::resource('clients', ClientController::class);
 Route::resource('invoices', InvoiceController::class);
