@@ -50,7 +50,7 @@
 
     <div>
         <label for="amount">Amount:</label>
-        <input type="number" name="amount" id="amount" value="{{ old('amount', $invoice->amount) }}" step="0.01" readonly>
+        <input type="number" name="amount" id="amount" value="{{ old('amount', $invoice->amount) }}" step="0.01">
         @error('amount')
             <div style="color: red;">{{ $message }}</div>
         @enderror

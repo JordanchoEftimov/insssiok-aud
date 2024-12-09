@@ -9,7 +9,7 @@
 </div>
 
 <div>
-    <strong>Date:</strong> {{ $invoice->date }}
+    <strong>Date:</strong> {{ $invoice->created_at }}
 </div>
 
 <div>

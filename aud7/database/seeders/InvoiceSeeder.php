@@ -25,7 +25,7 @@ class InvoiceSeeder extends Seeder
                     'invoice_number' => $faker->unique()->numerify('INV-#######'),
                     'due_date' => $faker->date(),
                     'status' => InvoiceStatusEnum::cases()[array_rand(InvoiceStatusEnum::cases())]->value,
-                    'amount' => $faker->randomFloat(2, 100, 1000),
+                    'amount' => $faker->numberBetween(100, 1000),
                     'client_id' => $clients->random()->id,
                 ]);
         }
