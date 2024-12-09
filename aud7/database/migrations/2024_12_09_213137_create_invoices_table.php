@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice_number')->index();
+            $table->string('invoice_number')->unique()->index();
             $table->date('due_date');
             $table->string('status')->default(InvoiceStatusEnum::PENDING);
             $table->unsignedInteger('amount');

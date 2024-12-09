@@ -26,7 +26,7 @@ class InvoiceStoreRequest extends FormRequest
         return [
             'invoice_number' => 'required|string|unique:invoices,invoice_number',
             'amount' => 'required|integer|min:0',
-            'due_date' => 'required|date|after_or_equal:date',
+            'due_date' => 'required|date|after_or_equal:today',
             'status' => ['required', Rule::in(InvoiceStatusEnum::cases())],
             'client_id' => 'required|exists:clients,id',
         ];

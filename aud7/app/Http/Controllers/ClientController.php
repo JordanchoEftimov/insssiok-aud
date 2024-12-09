@@ -65,6 +65,7 @@ class ClientController extends Controller
 
     public function destroy(Client $client): RedirectResponse
     {
+        $client->invoices()->delete();
         $client->delete();
 
         return redirect()
