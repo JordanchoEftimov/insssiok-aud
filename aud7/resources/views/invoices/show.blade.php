@@ -5,7 +5,10 @@
 </div>
 
 <div>
-    <strong>Client:</strong> {{ $invoice->client->full_name }}
+    <strong>Client:</strong>
+    <a href="{{ route('clients.show', $invoice->client->id) }}">
+        {{ $invoice->client->full_name }}
+    </a>
 </div>
 
 <div>
@@ -21,7 +24,7 @@
 </div>
 
 <div>
-    <strong>Amount:</strong> {{ $invoice->amount }}
+    <strong>Amount:</strong> {{ $invoice->amount }} $
 </div>
 
 <a href="{{ route('invoices.index') }}">Back to Invoices</a>
