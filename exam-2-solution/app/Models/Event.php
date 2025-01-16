@@ -19,6 +19,8 @@ class Event extends Model
         return $this->hasMany(Reservation::class);
     }
 
+    // Ова е потребно само доколку го користите
+    // првиот начин за проверка дали има потврдени резервации
     public function confirmedReservations(): HasMany
     {
         return $this->reservations()

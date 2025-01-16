@@ -42,11 +42,21 @@ class EventController extends Controller
 
     public function destroy(Event $event): JsonResponse
     {
+        // Прв начин на решавање
         //        abort_if($event->confirmedReservations()->exists(), 400);
+
+        // Втор начин на решавање
+        //        abort_if($event->reservations()
+        //            ->where('status', ReservationStatus::CONFIRMED)
+        //            ->exists(),
+        //            400);
+
+        // Трет начин на решавање
         abort_if($event->reservations()
             ->where('status', ReservationStatus::CONFIRMED)
-            ->exists(),
+            ->count() > 0,
             400);
+
         $event->delete();
 
         return response()->json();
