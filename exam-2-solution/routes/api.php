@@ -10,7 +10,14 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::apiResource('events', EventController::class);
+
 Route::apiResource('reservations', ReservationController::class)->only('store');
+
+// Прв начин за дефинирање на рутите за потврдување или откажување резервација
+// Route::put('/reservations/{reservation}/confirm', [ReservationController::class, 'confirm']);
+// Route::put('/reservations/{reservation}/cancel', [ReservationController::class, 'cancel']);
+
+// Втор начин за дефинирање на рутите за потврдување или откажување резервација
 Route::prefix('/reservations/{reservation}')->group(function () {
     Route::put('/confirm', [ReservationController::class, 'confirm']);
     Route::put('/cancel', [ReservationController::class, 'cancel']);
